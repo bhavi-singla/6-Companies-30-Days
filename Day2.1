@@ -1,0 +1,22 @@
+Given a string, Your task is to  complete the function encode that returns the run length encoded string for the given string.
+Solution:-
+string encode(string src)
+{     
+    string str="";
+    char prev=src[0];
+    int count=1;
+    for(int i=1;i<src.length();i++)
+    {
+        if(prev==src[i])
+            count++;
+        else{
+            str+=prev;
+            str+=count+48;
+            prev=src[i];
+            count=1;
+        }    
+    }
+    str+=prev;
+    str+=count+48;
+    return str;
+}     
