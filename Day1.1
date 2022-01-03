@@ -1,0 +1,28 @@
+Given an array of strings, return all groups of strings that are anagrams.
+Solution:-
+vector<vector<string> > Anagrams(vector<string>& string_list) {
+        //code here
+        vector<vector<string>>ana;
+        map<string,vector<string>>mp;
+        for(int i=0;i<string_list.size();i++)
+        {
+            string str =string_list[i];
+            sort(str.begin(),str.end());
+            if(mp.find(str)==mp.end())
+            {
+                vector<string>vec;
+                vec.push_back(string_list[i]);
+                mp[str]=vec;
+            }
+            else{
+                vector<string>vec=mp[str];
+                vec.push_back(string_list[i]);
+                mp[str]=vec;
+            }
+        }
+        for(auto it=mp.begin();it!=mp.end();it++)
+        {
+            ana.push_back(it->second);
+        }
+        return ana;
+    }
