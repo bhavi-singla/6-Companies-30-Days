@@ -1,0 +1,43 @@
+void putstrings(int n ,vector<string>contacts,string s, vector<vector<string>> &vec,int i,int m)
+{
+    if(i>=m)
+        return;
+    string str=s.substr(0,i+1);
+    //cout<<" "<<str<<" ";
+    vector<string>v;
+    for(int j=0;j<n;j++)
+    {
+        string str1=contacts[j].substr(0,i+1);
+        //cout<<" "<<str1<<" ";
+        if(str1==str )
+        {
+            v.push_back(contacts[j]);
+        }
+    }
+    if(v.empty())
+    {
+        v.push_back("0");
+    }
+    vec.push_back(v);
+    putstrings(n,contacts,s,vec,i+1,m);
+}
+    vector<vector<string>> displayContacts(int n, string contact[], string s)
+    {
+        // code here
+        vector<vector<string>>vec;
+        sort(contact,contact+n);
+        string temp=contact[0];
+        vector<string>contacts;
+        for(int i=1;i<n;i++)
+        {
+            if(temp==contact[i])
+            {
+                continue;
+            }
+            contacts.push_back(temp);
+            temp=contact[i];
+        }
+        contacts.push_back(temp);
+        putstrings(contacts.size(),contacts,s,vec,0,s.length());
+        return  vec;
+    }
