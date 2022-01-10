@@ -1,0 +1,20 @@
+Column name from a given column number
+Solution:-
+string colName (long long int n)
+    {
+        string str="";
+        while(n>0)
+        {
+            int rem=n%26;
+            n=n/26;
+            if(rem==0)
+            {
+                rem=26;
+                n=n-1;
+            }
+            rem=rem-1;
+            str+=65+rem;
+        }
+        reverse(str.begin(),str.end());
+        return str;
+    }
