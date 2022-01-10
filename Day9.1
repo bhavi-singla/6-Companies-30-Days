@@ -1,0 +1,36 @@
+Nuts and Bolts Problem
+Solution:-
+static int precedence(char ch)
+    {
+        switch(ch)
+        {
+            case '!': return 9;
+            break;
+            case '#': return 8;
+            break;
+            case '$': return 7;
+            break;
+            case '%': return 6;
+            break;
+            case '&': return 5;
+            break;
+            case '*': return 4;
+            break;
+            case '@': return 3;
+            break;
+            case '^': return 2;
+            break;
+            case '~': return 1;
+            break;
+        }
+    }
+    
+    static bool cmp(char nut1,char nut2)
+    {
+        return (precedence(nut1) > precedence(nut2));
+    }
+    
+	void matchPairs(char nuts[], char bolts[], int n) {
+	    sort(nuts, nuts+n, cmp);
+	    sort(bolts, bolts+n, cmp);
+	}
