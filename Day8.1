@@ -1,0 +1,28 @@
+First non-repeating character in a stream
+Solution:-
+string FirstNonRepeating(string A){
+		       queue<char>q;
+		       int count[26];
+		       memset(count,0,sizeof(count));
+		       string str="";
+		       q.push(A[0]);
+		       count[A[0]-'a']++;
+		       str+=A[0];
+		       for(int i=1;i<A.length();i++)
+		       {
+		           count[A[i]-'a']++;
+		           q.push(A[i]);
+		           while(!q.empty() && count[q.front()-'a']>1)
+		           {
+		               q.pop();
+		           }
+		           if(q.empty())
+		           {
+		               str+='#';
+		           }
+		           else{
+		               str+=q.front();
+		           }
+		       }
+		       return str;
+		}
