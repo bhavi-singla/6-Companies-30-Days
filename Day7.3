@@ -1,0 +1,40 @@
+Maximum of all subarrays of size K
+Solution:-
+ vector<int> max_of_subarrays(vector<int> arr, int n, int k) {
+        vector<int>vec;
+        if(k>n)
+            return vec;
+        deque<int>d;
+        for(int i=0;i<k;i++)
+        {
+            if(d.empty())
+            {
+                d.push_back(i);
+                continue;
+            }
+            while(!d.empty() && arr[d.back()]<=arr[i])
+            {
+                d.pop_back();
+            }
+            d.push_back(i);
+        }
+        vec.push_back(arr[d.front()]);
+        for(int i=k;i<n;i++)
+        {
+            if(d.empty())
+            {
+                d.push_back(i);
+                continue;
+            }
+            while(!d.empty() && d.front()<=i-k)
+            {
+                d.pop_front();
+            }
+            while(!d.empty() && arr[d.back()]<=arr[i])
+            {
+                d.pop_back();
+            }
+            d.push_back(i);
+            vec.push_back(arr[d.front()]);
+        }
+    }
