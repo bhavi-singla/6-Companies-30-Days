@@ -1,0 +1,25 @@
+Minimum Sum problem
+
+int findmindiff(int arr[], int n, int sum1, int sum2, vector<vector<int>>&dp)
+    {
+        if(n==0)
+        {
+            return abs(sum2-sum1-sum1);
+        }
+        if(dp[n][sum1]!=-1)
+            return dp[n][sum1];
+        dp[n][sum1]=min(findmindiff(arr,n-1,sum1+arr[n-1],sum2,dp),findmindiff(arr,n-1,sum1,sum2,dp));
+        return dp[n][sum1];
+    }
+	int minDifference(int arr[], int n)  { 
+	    int sum1=0;
+	    int sum2=0;
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        sum2+=arr[i];
+	    }
+	    vector<vector<int>>dp(n+1,vector<int>(sum2+1,-1));
+	    return findmindiff(arr,n,sum1,sum2,dp);
+	    
+	} 
