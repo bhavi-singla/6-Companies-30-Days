@@ -1,0 +1,75 @@
+Burning Tree:
+
+int findunder(Node* root,int target,queue<Node*>& q,int& count)
+    {
+        if(root==NULL)
+            return 0;
+        if(root->data==target)
+        {
+            if(root->left)
+                q.push(root->left);
+            if(root->right)
+                q.push(root->right);
+            return 1;
+        }
+        int left=findunder(root->left,target,q,count);
+        if(left)
+        {
+            int n =q.size();
+            for(int i=0;i<n;i++)
+            {
+                Node* temp=q.front();
+                q.pop();
+                if(temp->left)
+                    q.push(temp->left);
+                if(temp->right)
+                    q.push(temp->right);
+            }
+            count++;
+            if(root->right)
+                q.push(root->right);
+            return 1;
+        }
+        
+        int right=findunder(root->right,target,q,count);
+        if(right)
+        {
+            int n =q.size();
+            for(int i=0;i<n;i++)
+            {
+                Node* temp=q.front();
+                q.pop();
+                if(temp->left)
+                    q.push(temp->left);
+                if(temp->right)
+                    q.push(temp->right);
+            }
+            count++;
+            if(root->left)
+                q.push(root->left);
+            return 1;
+        }
+        return 0;
+    }
+    int minTime(Node* root, int target) 
+    {
+        queue<Node*>q;
+        int count=0;
+        findunder(root,target,q,count);
+        while(!q.empty())
+        {
+            int n =q.size();
+            for(int i=0;i<n;i++)
+            {
+                Node* temp=q.front();
+                q.pop();
+                if(temp->left)
+                    q.push(temp->left);
+                if(temp->right)
+                    q.push(temp->right);
+            }
+            count++;
+        }
+    
+        return count;
+    }
