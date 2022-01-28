@@ -1,0 +1,59 @@
+Alien dictionary
+
+    void add(int u,int v)
+    {
+        adj[u].push_back(v);
+    }
+    void toputil(stack<int>& s,int i,bool visited[])
+    {
+        visited[i]=true;
+        for(auto j=adj[i].begin();j!=adj[i].end();j++)
+        {
+            if(!visited[*j])
+            {
+                toputil(s,*j,visited);
+            }
+        }
+        s.push(i);
+    }
+    string topo()
+    {
+        stack<int>s;
+        bool visited[v];
+        memset(visited,false,sizeof(visited));
+        for(int i=0;i<v;i++)
+        {
+            if(!visited[i])
+                toputil(s,i,visited);
+        }
+        string str;
+        while(!s.empty())
+        {
+            int num=s.top();
+            s.pop();
+            str+=(char)('a'+num);
+            
+        }
+        return str;
+    }
+    string findOrder(string dict[], int N, int K) {
+        v=K;
+        adj=new list<int>[K];
+        for(int i=0;i<N-1;i++)
+        {
+            string s1=dict[i];
+            string s2=dict[i+1];
+            for(int j=0;j<min(s1.length(),s2.length());j++)
+            {
+                if(s1[j]!=s2[j])
+                {
+                    add(s1[j]-'a',s2[j]-'a');
+                    break;
+                }
+            }
+        }
+        string res;
+        res=topo();
+        //cout<<res<<endl;
+        return res;
+    }
