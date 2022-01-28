@@ -1,0 +1,39 @@
+Spiral traverse a matrix
+
+vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
+    {
+        vector<int>vec;
+    int hl=0;
+    int hr=c-1;
+    int vt=0;
+    int vb=r-1;
+    while(hl<=hr && vt<=vb)
+    {
+        for(int i=hl;i<=hr;i++)
+        {
+            vec.push_back(matrix[vt][i]);
+        }
+        vt++;
+        for(int i=vt;i<=vb;i++)
+        {
+            vec.push_back(matrix[i][hr]);
+        }
+        hr--;
+        if(vt<=vb){
+        for(int i=hr;i>=hl;i--)
+        {
+            vec.push_back(matrix[vb][i]);
+        }
+        vb--;
+        }
+        if(hl<=hr)
+        {
+        for(int i=vb;i>=vt;i--)
+        {
+            vec.push_back(matrix[i][hl]);
+        }
+        hl++;
+        }
+    }
+    return vec ;
+    }
