@@ -1,0 +1,19 @@
+Minimum steps to destination
+
+int minSteps(int D){
+        int steps=0;
+        int sum=0;
+        while(1)
+        {
+            steps++;
+            sum+=steps;
+            
+            if(sum==D)
+            {
+                return steps;
+            }
+            if(sum>D && (sum-D)%2==0)
+                return steps;
+        }
+        
+    }
