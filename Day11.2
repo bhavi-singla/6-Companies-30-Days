@@ -1,0 +1,32 @@
+Prerequisite tasks
+
+ bool dfs(int i,vector<vector<int>>vec,vector<bool>&visited,vector<bool>&onpath)
+    {
+        if(visited[i])
+            return true;
+        visited[i]=true;
+        onpath[i]=true;
+        for(auto it=vec[i].begin();it!=vec[i].end();it++)
+        {
+            if(onpath[*it] || dfs(*it,vec,visited,onpath)==false)
+                return false;
+        }
+        onpath[i]=false;
+        return true;
+    }
+	bool isPossible(int N, vector<pair<int, int> >& prerequisites) {
+	       vector<vector<int>>vec(N);
+	       for(int i=0;i<prerequisites.size();i++)
+	       {
+	           vec[prerequisites[i].first].push_back(prerequisites[i].second);
+	           //cout<<prerequisites[i].first<<" "<<prerequisites[i].second<<endl;
+	       }
+	       vector<bool>visited(N,false);
+	       vector<bool>onpath(N,false);
+	       for(int i=0;i<N;i++)
+	       {
+	           if(!visited[i] && dfs(i,vec,visited,onpath)==false)
+	                return false;
+	       }
+	       return true;
+	}
