@@ -1,0 +1,17 @@
+Stickler Thief
+
+    ll FindMaxSum(ll arr[], ll n)
+    {
+        ll ex=0;
+        ll in=arr[0];
+        ll exnew=0;
+        for(int i=1;i<n;i++)
+        {
+            exnew=max(in,ex);
+            in=ex+arr[i];
+            ex=exnew;
+        }
+        if(in>ex)
+        return in;
+        return ex;
+    }
