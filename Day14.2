@@ -1,0 +1,29 @@
+Generate binary numbers
+
+vector<string> generate(int N)
+{
+	// Your code here
+	vector<string>vec;
+	
+	for(int i=1;i<=N;i++)
+	{
+	    int x=i;
+	    string s="";
+	    while(x)
+	    {
+	        if(x%2)
+	        {
+	            s.push_back('1');
+	            x=x/2;
+	        }
+	        else 
+	        {
+	           s.push_back('0');
+	            x=x/2;
+	        }
+	    }
+	    reverse(s.begin(),s.end());
+	    vec.push_back(s);
+	}
+	return vec;
+}
