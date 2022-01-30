@@ -1,0 +1,23 @@
+Number of unique paths
+
+int NumberOfPath(int a, int b)
+    {
+        int dp[a][b];
+        memset(dp,0,sizeof(dp));
+        for(int i=a-1;i>=0;i--)
+        {
+            dp[i][b-1]=1;
+        }
+        for(int i=b-1;i>=0;i--)
+        {
+            dp[a-1][i]=1;
+        }
+        for(int i=a-2;i>=0;i--)
+        {
+            for(int j=b-2;j>=0;j--)
+            {
+                dp[i][j]=dp[i+1][j]+dp[i][j+1];
+            }
+        }
+        return dp[0][0];
+    }
