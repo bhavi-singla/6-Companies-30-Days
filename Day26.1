@@ -1,0 +1,39 @@
+Path with max probability
+
+double findans(vector<vector<pair<int,double>>> graph,vector<double>vec,int start, int end,vector<bool>visited)
+    {
+        if(start==end)
+        {
+            return 1.0;
+        }
+        if(vec[start]!=INT_MIN)
+            return vec[start];
+        
+        visited[start]=true;
+        
+        for(auto it=graph[start].begin();it!=graph[start].end();it++)
+        {
+            if(!visited[it->first])
+            {
+                //cout<<it->second<<endl;
+                
+                double temp1=findans(graph,vec,it->first,end,visited);
+                vec[start]=max(vec[start],temp1*it->second);
+            }
+        }
+        visited[start]=false;
+        return vec[start]!=INT_MIN?vec[start]:0;
+    }
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
+        double ans=INT_MIN;
+        vector<bool>visited(n,false);
+        vector<vector<pair<int,double>>> graph(n);
+        for(int i=0;i<edges.size();i++)
+        {
+            graph[edges[i][0]].push_back({edges[i][1],succProb[i]});
+            graph[edges[i][1]].push_back({edges[i][0],succProb[i]});
+        }
+        vector<double>vec(n,INT_MIN);
+        return findans(graph,vec,start,end,visited);
+        
+    }
