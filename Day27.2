@@ -1,0 +1,17 @@
+Transform to Sum Tree
+
+int sumtree(Node *node)
+    {
+        if(node==NULL)
+        return 0;
+        int left=sumtree(node->left);
+        int right=sumtree(node->right);
+        int d=node->data;
+        node->data=left+right;
+        return d+node->data;
+    }
+    void toSumTree(Node *node)
+    {
+        // Your code here
+        sumtree(node);
+    }
