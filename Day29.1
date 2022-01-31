@@ -1,0 +1,20 @@
+Generate Random number in a circle
+
+    double r;
+    double x;
+    double y;
+    Solution(double radius, double x_center, double y_center) {
+        r=radius;
+        x=x_center;
+        y=y_center;
+    }
+    
+    vector<double> randPoint() {
+        double rn=(double)rand()/RAND_MAX;
+        rn=sqrt(rn)*r;
+        double thetha=((double)rand()/RAND_MAX)*2*M_PI;
+        vector<double>vec;
+        vec.push_back(x+rn*cos(thetha));
+        vec.push_back(y+rn*sin(thetha));
+        return vec;
+    }
