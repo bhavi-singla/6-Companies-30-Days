@@ -1,0 +1,57 @@
+Sorted subsequence of size 3
+
+vector<int> find3Numbers(vector<int> arr, int N) {
+        vector<int>vec;
+        stack<int>s;
+        s.push(arr[0]);
+        int left[N];
+        left[0]=-1;
+        for(int i=1;i<N;i++)
+        {
+            while(!s.empty() && s.top()>=arr[i])
+            {
+                s.pop();
+            }
+            if(s.empty())
+            {
+                left[i]=-1;
+            }
+            else{
+                left[i]=s.top();
+            }
+            s.push(arr[i]);
+        }
+        while(!s.empty())
+        {
+            s.pop();
+        }
+        int right[N];
+        right[N-1]=-1;
+        s.push(arr[N-1]);
+        for(int i=N-2;i>=0;i--)
+        {
+            while(!s.empty() && s.top()<=arr[i])
+            {
+                s.pop();
+            }
+            if(s.empty())
+            {
+                right[i]=-1;
+            }
+            else{
+                right[i]=s.top();
+            }
+            s.push(arr[i]);
+        }
+        for(int i=1;i<N-1;i++)
+        {
+            if(left[i]!=-1 && right[i]!=-1)
+            {
+                vec.push_back(left[i]);
+                vec.push_back(arr[i]);
+                vec.push_back(right[i]);
+                break;
+            }
+        }
+        return vec;
+    }
