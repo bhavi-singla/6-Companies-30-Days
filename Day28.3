@@ -1,0 +1,21 @@
+Guess number higher or lowerII
+
+int getroot(int low,int high,vector<vector<int>>& dp)
+    {
+        if(low>=high)
+        {
+            return 0;
+        }
+        if(dp[low][high]!=-1)
+            return dp[low][high];
+        int minroot=INT_MAX;
+        for(int i=low;i<=high;i++)
+        {
+            minroot=min(minroot,max(getroot(low,i-1,dp),getroot(i+1,high,dp))+i);
+        }
+        return dp[low][high]=minroot;
+    }
+    int getMoneyAmount(int n) {
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        return getroot(1,n,dp);
+    }
