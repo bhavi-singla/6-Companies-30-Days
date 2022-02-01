@@ -1,0 +1,31 @@
+Minimum operations to convert array A to B
+
+int minans(int A[], int B[], int N, int M, int i, int j)
+    {
+        if(i>=N)
+        {
+            return M-j;
+        }
+        if(j>=M)
+        {
+            return N-i;
+        }
+        if(A[i]==B[j])
+        {
+            return minans(A,B,N,M,i+1,j+1);
+        }
+        else{
+            return min(minans(A,B,N,M,i+1,j),minans(A,B,N,M,i,j+1))+1;
+        }
+    }
+    int minInsAndDel(int A[], int B[], int N, int M) {
+        if(N==0)
+        {
+            return M;
+        }
+        if(M==0)
+        {
+            return N;
+        }
+        return minans(A,B,N,M,0,0);
+    }
