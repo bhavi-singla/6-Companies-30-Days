@@ -1,0 +1,38 @@
+
+
+string amendSentence (string s)
+    {
+        string str="";
+        int n =s.length();
+        string temp="";
+        if(s[0]>='A' && s[0]<='Z')
+            temp+=s[0]+'a'-'A';
+        else
+            temp+=s[0];
+        if(n==1)
+        {
+            return temp;
+        }
+        int i=1;
+        while(i<n)
+        {
+            while(i<n && s[i]>='a' && s[i]<='z')
+            {
+                temp+=s[i];
+                i++;
+            }
+            str+=temp;
+            
+            if(i<n)
+            {
+                str+=" ";
+                temp=s[i]+'a'-'A';
+                i++;
+                if(i>=n)
+                {
+                    str+=temp;
+                }
+            }
+        }
+        return str;
+    }
