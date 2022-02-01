@@ -1,0 +1,22 @@
+Pots of gold
+
+int findmax(vector<int>a, vector<vector<int>>& dp,int start,int end)
+    {
+        if(start==end)
+        {
+            return a[start];
+        }
+        if(start>end)
+            return 0;
+        if(dp[start][end]!=-1)
+            return dp[start][end];
+        dp[start][end]=min(findmax(a,dp,start+2,end),findmax(a,dp,start+1,end-1))+a[start];
+        dp[start][end]=max(dp[start][end],a[end]+min(findmax(a,dp,start+1,end-1),findmax(a,dp,start,end-2)));
+        return dp[start][end];
+    }
+    int maxCoins(vector<int>&A,int n)
+    {
+	    vector<vector<int>> dp(n,vector<int>(n,-1));
+	    //memset(dp,-1,sizeof(dp));
+	    return findmax(A,dp,0,n-1);
+    }
