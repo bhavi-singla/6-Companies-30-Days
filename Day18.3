@@ -1,0 +1,84 @@
+Next higher permutation
+
+int bs(int s,int e,char val,string N)
+    {
+        int ind=-1;
+        while(s<=e)
+        {
+            int mid=s+(e-s)/2;
+            if(N[mid]<=val)
+            {
+                e=mid-1;
+            }
+            else{
+                s=mid+1;
+                if(ind==-1 || N[ind]>=N[mid])
+                {
+                    ind=mid;
+                }
+            }
+        }
+        return ind;
+    }
+    void rev(string& s,int l,int r)
+    {
+        while(l<r)
+        {
+            char temp=s[l];
+            s[l]=s[r];
+            s[r]=temp;
+            l++;
+            r--;
+        }
+    }
+    string nextPalin(string N) { 
+        int n = N.length();
+        int n1=n/2;
+        int mid=n/2;
+        if(n%2==0)
+            mid--;
+        n1--;
+        while(n1>0)
+        {
+            if(N[n1]>N[n1-1])
+            {
+                break;
+            }
+            n1--;
+        }
+        if(n1<=0)
+            return "-1";
+        //n1--;
+        //cout<<N[n1-1]<<endl;
+        //cout<<n1<<endl;
+        //auto it1=N.begin()+mid;
+        //cout<<*it1<<endl;
+        //auto it=lower_bound(N.begin()+n1,N.begin()+mid,N[n1-1]);
+        int it;
+        if(n%2==0)
+            it=bs(n1,mid,N[n1-1],N);
+        else
+            it=bs(n1,mid-1,N[n1-1],N);
+        //cout<<it<<endl;
+        char temp=N[it];
+        N[it]=N[n1-1];
+        N[n1-1]=temp;
+        if(n%2==0)
+            rev(N,n1,mid);
+        else
+            rev(N,n1,mid-1);
+        int n2=2*mid-n1;
+        
+        int it2=2*mid-it;
+        if(n%2==0)
+        {
+            n2++;
+            it2++;
+        }
+        //cout<<n2<<" "<<it2<<endl;
+        temp=N[it2];
+        N[it2]=N[n2+1];
+        N[n2+1]=temp;
+        rev(N,mid+1,n2);
+        return N;
+    }
