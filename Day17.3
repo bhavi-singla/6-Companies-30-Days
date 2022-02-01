@@ -1,0 +1,31 @@
+Generate all balanced paranthesis
+
+void generateall(int n,vector<string>& vec,int start,int end,string& str)
+    {
+        if(start>n || end>n)
+            return ;
+        if(start==n && end==n)
+        {
+            vec.push_back(str);
+            return ;
+        }
+        if(start<n)
+        {
+            str+='(';
+            generateall(n,vec,start+1,end,str);
+            str.pop_back();
+        }
+        if(end<start)
+        {
+            str+=')';
+            generateall(n,vec,start,end+1,str);
+            str.pop_back();
+        }
+    }
+    vector<string> AllParenthesis(int n) 
+    {
+        vector<string>vec;
+        string str="";
+        generateall(n,vec,0,0,str);
+        return vec;
+    }
