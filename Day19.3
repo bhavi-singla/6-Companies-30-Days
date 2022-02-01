@@ -1,0 +1,22 @@
+Leaders in array
+
+vector<int> leaders(int a[], int n){
+        vector<int>vec;
+        stack<int>s;
+        s.push(a[0]);
+        for(int i=1;i<n;i++)
+        {
+            while(!s.empty() && s.top()<a[i])
+            {
+                s.pop();
+            }
+            s.push(a[i]);
+        }
+        while(!s.empty())
+        {
+            vec.push_back(s.top());
+            s.pop();
+        }
+        reverse(vec.begin(),vec.end());
+        return vec;
+    }
