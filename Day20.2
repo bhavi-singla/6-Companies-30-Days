@@ -1,0 +1,49 @@
+Smallest range in K lists
+
+pair<int,int> findSmallestRange(int KSortedArray[][N], int n, int k)
+    {
+          //code here
+          //vector<pair<int,pair<int,int>>>vec;
+          priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>>pq;
+          int low=INT_MAX;
+          int high=INT_MIN;
+          int win=INT_MAX;
+          pair<int,int>res;
+          for(int i=0;i<k;i++)
+          {
+              pq.push(make_pair(KSortedArray[i][0],make_pair(i,0)));
+              if(KSortedArray[i][0]>high)
+                high=KSortedArray[i][0];
+          }
+        
+          while(1)
+          {
+              //sort(vec.begin(),vec.end(),mycomp);
+              pair<int,pair<int,int>>temp=pq.top();
+              low=temp.first;
+              //high=vec[k-1].first;
+              if(high-low<win)
+              {
+                  res=make_pair(low,high);
+                  win=high-low;
+              }
+              
+              if(temp.second.second>=n-1)
+              {
+                  break;
+              }
+              
+              
+              pq.pop();
+              temp.second.second=temp.second.second+1;
+              temp.first=KSortedArray[temp.second.first][temp.second.second];
+              if(high<temp.first)
+              {
+                  high=temp.first;
+              }
+              pq.push(temp);
+              //cout<<vec[0].first<<" ";
+          }
+          //cout<<endl;
+          return res;
+    }
