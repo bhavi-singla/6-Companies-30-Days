@@ -1,0 +1,29 @@
+Koko eating bananas
+
+int minEatingSpeed(vector<int>& piles, int h) {
+        long long int high=0;
+        int n = piles.size();
+        for(int i=0;i<n;i++)
+        {
+            if(high<piles[i])
+                high=piles[i];
+        }
+        int low=1;
+        while(low<high)
+        {
+            int mid=low+(high-low)/2;
+            long long int val = 0;
+            for(int i=0;i<n;i++)
+            {
+                val+=(piles[i]+mid-1)/mid;
+            }
+            if(val<=h)
+            {
+                high=mid;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return high;
+    }
