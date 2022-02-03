@@ -1,0 +1,73 @@
+Find in mountain array
+
+ int findlargest(MountainArray &mountainArr,int low,int high)
+    {
+        if(low==high)
+            return low;
+        int mid = low+(high-low)/2;
+        int num=mountainArr.get(mid);
+        if((mid+1>high||num>mountainArr.get(mid+1)) && (mid-1<low || num>mountainArr.get(mid-1)))
+        {
+            return mid;
+        }
+        else if((mid+1>high||num>mountainArr.get(mid+1)) && (mid-1<low || num<mountainArr.get(mid-1)))
+        {
+            high=mid-1;
+            return findlargest(mountainArr,low,high);
+        }
+        else{
+            low=mid+1;
+            return findlargest(mountainArr,low,high);
+        }
+    }
+    int findelefirst(MountainArray &mountainArr,int low,int high,int target)
+    {
+        if(low>high)
+            return -1;
+        int mid=low+(high-low)/2;
+        int num=mountainArr.get(mid);
+        if(num==target)
+        {
+            return mid;
+        }
+        else if(num<target)
+        {
+            low=mid+1;
+            return findelefirst(mountainArr,low,high,target);
+        }
+        else{
+            high=mid-1;
+            return findelefirst(mountainArr,low,high,target);
+        }
+    }
+    int findelesec(MountainArray &mountainArr,int low,int high,int target)
+    {
+        if(low>high)
+            return -1;
+        int mid=low+(high-low)/2;
+        int num=mountainArr.get(mid);
+        if(num==target)
+        {
+            return mid;
+        }
+        else if(num>target)
+        {
+            low=mid+1;
+            return findelesec(mountainArr,low,high,target);
+        }
+        else{
+            high=mid-1;
+            return findelesec(mountainArr,low,high,target);
+        }
+    }
+    int findInMountainArray(int target, MountainArray &mountainArr) {
+        int low=0;
+        int high=mountainArr.length();
+        int index = findlargest(mountainArr,low,high-1);
+        cout<<index<<endl;
+        int l = findelefirst(mountainArr,low,index,target);
+        cout<<l<<endl;
+        if(l!=-1)
+            return l;
+        return findelesec(mountainArr,index+1,high-1,target);
+    }
