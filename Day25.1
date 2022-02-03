@@ -1,0 +1,49 @@
+Minimum swaps to arrange a binary grid
+
+int minSwaps(vector<vector<int>>& grid) {
+        
+        int n = grid.size();
+        vector<int>zeros(n);
+        for(int i=0;i<n;i++)
+        {
+            int count=0;
+            bool isdone=true;
+            for(int j=n-1;j>=0;j--)
+            {
+                if(grid[i][j]==1)
+                {
+                    zeros[i]=count;
+                    isdone=false;
+                    break;
+                }
+                else count++;
+            }
+            if(isdone)
+            {
+                zeros[i]=count;
+            }
+        }
+        int res=0;
+        for(int i=0;i<n;i++)
+        {
+            int req=n-i-1;
+            int cur=i;
+            cout<<req<<" ";
+            while(cur<n && zeros[cur]<req)
+            {
+                cout<<zeros[cur]<<" ";
+                cur++;
+            }
+            cout<<cur<<endl;
+            if(cur==n)
+                return -1;
+            res+=cur-i;
+            while(cur>i)
+            {
+                zeros[cur]=zeros[cur-1];
+                cur--;
+            }
+            
+        }
+        return res;
+    }
