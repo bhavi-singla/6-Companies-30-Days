@@ -1,1 +1,47 @@
+Split array in largest sum
 
+bool isvalid(vector<int>nums,int n,long long int mid,int m)
+    {
+        int halves=0;
+        long long int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=nums[i];
+            if(sum>mid)
+            {
+                halves++;
+                sum=nums[i];
+            }
+        }   
+        cout<<mid<<" "<<halves<<endl;
+        if(halves<m)
+            return true;
+        return false;
+    }
+    int splitArray(vector<int>& nums, int m) {
+        long long int sum=0;
+        long long int maxnum=0;
+        int n = nums.size();
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]>maxnum)
+                maxnum=nums[i];
+            sum+=nums[i];
+        }
+        long long int res=0;
+        long long int low=maxnum;
+        long long int high=sum;
+        while(low<=high)
+        {
+            long long int mid=low+(high-low)/2;
+            if(isvalid(nums,n,mid,m))
+            {
+                res=mid;
+                high=mid-1;   
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return res;
+    }
