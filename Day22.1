@@ -1,0 +1,57 @@
+Largest number in K swaps
+
+void findmaxstring(string str,int n,int k,string& ans,int i)
+    {
+        if(i>=n)
+        {
+            return ;
+        }
+        if(k<=0)
+        {
+            return ;
+        }
+        int m=i;
+        char ch=str[m];
+        for(int j=i+1;j<n;j++)
+        {
+            if(str[m]<str[j])
+            {
+                ch=str[j];
+                m=j;
+            }
+        }
+        if(m==i)
+        {
+            findmaxstring(str,n,k,ans,i+1);   
+        }
+        else{
+            for(int j=i;j<n;j++)
+            {
+                if(ch==str[j])
+                {
+                    char temp=str[j];
+                    str[j]=str[i];
+                    str[i]=temp;
+                    if (str.compare(ans) > 0)
+                        ans = str;
+                    findmaxstring(str,n,k-1,ans,i+1);
+                    temp=str[j];
+                    str[j]=str[i];
+                    str[i]=temp;
+                }
+            }
+        }
+        
+    }
+    string findMaximumNum(string str, int k)
+    {
+        string ans=str;
+        int n =str.length();
+        if(n==1 || n==0)
+            return str;
+        if(k==0)
+            return str;
+        findmaxstring(str,n,k,ans,0);
+        
+        return ans;
+    }
