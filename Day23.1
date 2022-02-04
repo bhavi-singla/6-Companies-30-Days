@@ -1,0 +1,46 @@
+Capacity to ship packages
+
+bool isvalid(int mid,vector<int>weights,int n,int days)
+    {
+        int sum=0;
+        int halves=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=weights[i];
+            if(sum>mid)
+            {
+                sum=weights[i];
+                halves++;
+            }
+        }
+        if(halves<days)
+        {
+            return true;
+        }
+        return false;
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+        int low=0;
+        int high=0;
+        int n = weights.size();
+        for(int i=0;i<n;i++)
+        {
+            if(low<weights[i])
+                low=weights[i];
+            high+=weights[i];
+        }
+        int res=INT_MAX;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(isvalid(mid,weights,n,days))
+            {
+                high=mid-1;
+                res=min(res,mid);   
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return res;
+    }
